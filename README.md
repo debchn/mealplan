@@ -2,6 +2,6 @@ gem install mechanize
 
 gem install sinatra
 
-ruby app.rb
+ruby myapp.rb
 
-(or, in Cloud9, ruby app.rb -p $PORT -o $IP')
+(or, in Cloud9, ruby myapp.rb -p $PORT -o $IP')
