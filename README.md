@@ -1,7 +1,7 @@
-gem install mechanize
+To run:
 
-gem install sinatra
+    $ gem install bundler
+    $ bundle install
+    $ bundle exec ruby myapp.rb
 
-ruby myapp.rb
-
-(or, in Cloud9, ruby myapp.rb -p $PORT -o $IP')
+(or, in Cloud9, `ruby myapp.rb -p $PORT -o $IP'`)
