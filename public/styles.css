@@ -290,8 +290,22 @@ a:hover {
 }
 
 /* No Frills */
-.noFrills h3 .selected {
+.noFrills .button {
+  display: inline-block;
+  height: 30px;
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 0 5px;
+  color: white;
+  background: blue;
+  font-variant: small-caps;
+}
+.noFrills .button:hover {
+  background: LightBlue;
+}
+.noFrills .selected {
   color: blue;
+  background: LightBlue;
 }
 .noFrills li {
   position: relative;
@@ -311,13 +325,13 @@ a:hover {
   border-radius: 5px;
   position: relative;
 }
-.recipes h2 .editable .fa-times-circle {
+.recipes h2 .editable .delete {
   position: absolute;
   top: 0px;
   right: 1px;
   font-size: 12px;
 }
-.recipes h2 .editable .fa-times-circle:hover {
+.recipes h2 .editable .delete:hover {
   color: #c30a1f;
 }
 .recipes p #addField {

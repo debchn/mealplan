@@ -20,7 +20,7 @@
 					<li>
 						<h3><%= item[:label] %></h3>
 						<p><%= item[:description] %></p>
-						<i class="fa fa-times noThanks"></i>
+						<a href="#" class="noThanks" onclick="event.preventDefault();"><i class="fa fa-times"></i></a>
 					</li>
 				<% end %>
 			</ul>
@@ -28,7 +28,7 @@
 		<div class="recipes">
 			<h2>Recipes including <span id="ingredients">...</span></h2>
 			<p class="manualAdd">
-				<i class="fa fa-plus-circle"></i> Manually add ingredient
+				<a href="#" onclick="event.preventDefault();"><i class="fa fa-plus-circle"></i> Manually add ingredient</a>
 				<input type="text" id="addField">
 			</p>
 			<p class='hint' style="display:none;">(Double-click ingredient fields to edit them.)</p>

@@ -6,10 +6,10 @@ mealPlan.ingredients = [];
 
 mealPlan.removeFromIngredients = function(element){
     var index = mealPlan.ingredients.indexOf(element.text().toLowerCase());
-    console.log(mealPlan.ingredients);
+
     mealPlan.ingredients.splice(index, 1);
-    console.log(mealPlan.ingredients);
-}
+
+};
 
 mealPlan.recipes = [];
 
@@ -35,11 +35,11 @@ mealPlan.addRecipe = function(id){
              chosenMeals.add(recipe);
         }
     });
-}
+};
 
 // No Frills stuff
 
-$('h3 span').on('click', function(){
+$('.noFrills .button').on('click', function(){
     if ($(this).hasClass("selected")) {
         // then the person is trying to unselect it.
         $(this).removeClass("selected");
@@ -57,7 +57,8 @@ $('h3 span').on('click', function(){
     } else {
         // the person is trying to select it. Turn it blue...
         $(this).addClass("selected");
-        $(this).attr("id", $(this).text().toLowerCase());
+        // make its id the lower-case, whitespace-removed version of its text
+        $(this).attr("id", $(this).text().replace(/\s/, '').toLowerCase());
 
         // ... add it to mealPlan.ingredients...
         var ingredient = $(this).text().toLowerCase();
@@ -86,7 +87,7 @@ yumYum.display = $('.recipes ul');
 
 yumYum.ingredientsSpan = $('#ingredients');
 
-yumYum.addButton = $('.manualAdd .fa-plus-circle');
+yumYum.addButton = $('.manualAdd a');
 yumYum.addField = $('#addField');
 
 yumYum.addButton.on('click', function(){
@@ -111,7 +112,29 @@ yumYum.manuallyAdd = function(inputField){
 
                 if (inputField.attr("id") == "editField") {
 
-                    inputField.parent().html(newContent + "<i class='fa fa-times-circle'></i>");
+                    inputField.parent().html(newContent + "<a href='#' class='delete' onclick='event.preventDefault();'><i class='fa fa-times-circle'></i></a>");
+
+                    // super sketch about having to put this function here:
+
+                    $('.editable .delete').on('click', function(){
+
+                        // if the ingredient was added from the NoFrills flyer, unhighlight it
+                        var editableSpan = $(this).parent();
+                        var highlightedSpan = $('#' + editableSpan.text().replace(/\s/, ''));
+                        if (highlightedSpan.length) {
+                            highlightedSpan.removeClass("selected");
+                        }
+
+                        // remove the ingredient from mealPlan.ingredients
+                        mealPlan.removeFromIngredients(editableSpan);
+
+                        yumYum.updateh2();
+
+                        if (!$.isEmptyObject(mealPlan.ingredients)) {
+                            yumYum.getRecipes(mealPlan.ingredients);
+                        }
+
+                    });
 
                 } else { // the input field is "addField" from manual input.
 
@@ -125,7 +148,7 @@ yumYum.manuallyAdd = function(inputField){
             }
         }
     });
-}
+};
 
 yumYum.updateh2 = function(){
 
@@ -135,9 +158,7 @@ yumYum.updateh2 = function(){
         yumYum.display.html("");
     } else {
         yumYum.ingredientsSpan.html(
-            '<span class="editable">'
-            + mealPlan.ingredients.join('<i class="fa fa-times-circle"></i></span> and <span class="editable">')
-            + '<i class="fa fa-times-circle"></i></span>'
+            '<span class="editable">' + mealPlan.ingredients.join('<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times-circle"></i></a></span> and <span class="editable">') + '<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times-circle"></i></a></span>'
         );
         $('p.hint').show();
     }
@@ -150,7 +171,7 @@ yumYum.updateh2 = function(){
         mealPlan.removeFromIngredients($(this));
 
         //IF the ingredient was highlighted in the NoFrills flyer
-        var highlightedSpan = $('#' + innerText);
+        var highlightedSpan = $('#' + innerText.replace(/\s/, ''));
         if (highlightedSpan.length) {
             highlightedSpan.removeClass("selected");
         }
@@ -164,11 +185,11 @@ yumYum.updateh2 = function(){
 
     });
 
-    $('.editable .fa-times-circle').on('click', function(){
+    $('.editable .delete').on('click', function(){
 
         // if the ingredient was added from the NoFrills flyer, unhighlight it
         var editableSpan = $(this).parent();
-        var highlightedSpan = $('#' + editableSpan.text());
+        var highlightedSpan = $('#' + editableSpan.text().replace(/\s/, ''));
         if (highlightedSpan.length) {
             highlightedSpan.removeClass("selected");
         }
@@ -184,7 +205,7 @@ yumYum.updateh2 = function(){
 
     });
 
-}
+};
 
 yumYum.getRecipes = function(ingredient){
 	$.ajax({
@@ -223,7 +244,7 @@ yumYum.displayRecipes = function(recipes){
             href: '#',
             onclick: "event.preventDefault(); mealPlan.addRecipe('" + recipe.id + "');"
         });
-        var noThanks = $('<i class="fa fa-times noThanks">');
+        var noThanks = $('<a href="#" onclick="event.preventDefault();" class="noThanks">').append($('<i class="fa fa-times">'));
         yumYum.display.append($('<li class="recipe">').append(title, source, image, ingredients, add, noThanks));
     });
 
@@ -231,7 +252,7 @@ yumYum.displayRecipes = function(recipes){
         $(this).parent().slideUp();
         $(this).remove();
     });
-}
+};
 
 // "Chosen Meals" section stuff
 
@@ -257,18 +278,18 @@ chosenMeals.add = function(recipe){
         var image = $('<img>');
     }
 
-    var yield = $('<p>').html("Yield: " + recipe.yield);
+    var recipeYield = $('<p>').html("Yield: " + recipe.yield);
     var time = $('<p>').html("Total time: " + recipe.totalTime);
     var ingredients = $('<ul>').html("<li>" + recipe.ingredientLines.join("</li><li>") + "</li>");
 
     var attribution = $('<span>').html(recipe.attribution.html);
 
-    var noThanks = $('<i class="fa fa-times noThanks">');
+    var noThanks = $('<a href="#" onclick="event.preventDefault();" class="noThanks">').append($('<i class="fa fa-times">'));
 
-    chosenMeals.list.append($('<li class="meal">').append(title, source, image, yield, time, ingredients, attribution, noThanks));
+    chosenMeals.list.append($('<li class="meal">').append(title, source, image, recipeYield, time, ingredients, attribution, noThanks));
 
     $('.noThanks').on('click', function(){
         $(this).parent().slideUp();
         $(this).remove();
     });
-}
+};
