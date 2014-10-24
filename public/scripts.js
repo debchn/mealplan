@@ -21,7 +21,7 @@ mealPlan.addRecipe = function(id){
     // make AJAX call to get full recipe
 
     $.ajax({
-        url: 'http://api.yummly.com/v1/api/recipe/' + id,
+        url: 'https://api.yummly.com/v1/api/recipe/' + id,
         type: 'GET',
         data: {
             format: 'jsonp',
@@ -209,7 +209,7 @@ yumYum.updateh2 = function(){
 
 yumYum.getRecipes = function(ingredient){
 	$.ajax({
-		url: 'http://api.yummly.com/v1/api/recipes',
+		url: 'https://api.yummly.com/v1/api/recipes',
 		type: 'GET',
 		data: {
 			format: 'jsonp',
