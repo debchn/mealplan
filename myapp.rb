@@ -107,7 +107,8 @@ def wrap_food_in_link(string)
 		"lettuce"	=> ["iceberg lettuce",
 						"romaine lettuce"],
 
-		"milk"		=> ["evaporated milk"],
+		"milk"		=> ["evaporated milk",
+						"coconut milk"],
 
 		"oil"		=> ["canola oil",
 						"olive oil",
@@ -174,7 +175,9 @@ def wrap_food_in_link(string)
 						"green tea",
 						"iced tea",
 						"jasmine tea",
-						"orange pekoe tea"]
+						"orange pekoe tea"],
+
+		"yogurt"	=> ["frozen yogurt"]
 	}
 
 	# the following list has been adapted from http://www.enchantedlearning.com/wordlist/food.shtml
@@ -498,7 +501,6 @@ def wrap_food_in_link(string)
 
 						"yam",
 						"yeast",
-						"yogurt",
 
 						"zucchini"
 					  ]
