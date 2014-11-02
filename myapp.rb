@@ -554,7 +554,7 @@ get '/' do
 
 	# get NoFrills sale items
 	scraper = Mechanize.new
-	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/text?storenumber=730&publicationid=2735f93f-a887-4fe6-9abe-bac6bcf808a6")
+	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/f8b3dd6e-b0eb-4ef3-8ed2-cfc1657e24f4/Text?morePublications=false")
 
 	# Flyer is in table format, and the sale items are in tables nested inside tables:
 	@food = eliminate_tables(
