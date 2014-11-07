@@ -4,7 +4,7 @@ require 'mechanize'
 set :server, 'webrick'
 
 def human_food_only(groceries)
-	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Toothpaste", "Toothbrush", "Hair Care", "Cat Food", "Dog Food", "Garbage", "Pampers", "Diapers"]
+	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Dial", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Crest", "Toothpaste", "Toothbrush", "Hair Care", "Lubriderm", "Cat Food", "Dog Food", "Whiskas", "Litter", "Garbage", "Ziploc", "Pampers", "Diapers"]
 	human_food = groceries.dup
 	
 	groceries.each do |item|
@@ -242,6 +242,7 @@ def wrap_food_in_link(string)
 						"coleslaw",
 						"collard greens",
 						"cookies",
+						"cool whip",
 						"corn",
 						"cornflakes",
 						"cornmeal",
@@ -271,11 +272,13 @@ def wrap_food_in_link(string)
 						"endives",
 
 						"figs",
+						"five alive",
 						"flax",
 						"flour",
 						"french fries",
 						"fritters",
 						"frosting",
+						"fruitopia",
 
 						"garlic",
 						"gelatin",
@@ -351,6 +354,7 @@ def wrap_food_in_link(string)
 						"milk",
 						"mint",
 						"mints",
+						"miracle whip",
 						"molasses",
 						"mozzarella",
 						"muffins",
@@ -360,6 +364,7 @@ def wrap_food_in_link(string)
 						
 						"naan",
 						"nectarines",
+						"nestea",
 						"noodles",
 						"nuts",
 						"nutmeg",
@@ -478,6 +483,7 @@ def wrap_food_in_link(string)
 						"tofu",
 						"tomatoes",
 						"tortilla",
+						"trout",
 						"tuna",
 						"turkey",
 						"turmeric",
