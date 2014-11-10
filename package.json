@@ -1,0 +1,25 @@
+{
+  "name": "mealplan",
+  "version": "1.0.0",
+  "description": "Plan your meals for the week based on the weekly No Frills flyer (west-end Toronto only)",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debchn/mealplan.git"
+  },
+  "author": "Deborah Chan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debchn/mealplan/issues"
+  },
+  "homepage": "https://github.com/debchn/mealplan",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.16.1"
+  }
+}

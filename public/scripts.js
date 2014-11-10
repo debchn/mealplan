@@ -112,7 +112,7 @@ yumYum.manuallyAdd = function(inputField){
 
                 if (inputField.attr("id") == "editField") {
 
-                    inputField.parent().html(newContent + "<a href='#' class='delete' onclick='event.preventDefault();'><i class='fa fa-times-circle'></i></a>");
+                    inputField.parent().html(newContent + "<a href='#' class='delete' onclick='event.preventDefault();'><i class='fa fa-times'></i></a>");
 
                     // super sketch about having to put this function here:
 
@@ -158,7 +158,7 @@ yumYum.updateh2 = function(){
         yumYum.display.html("");
     } else {
         yumYum.ingredientsSpan.html(
-            '<span class="editable">' + mealPlan.ingredients.join('<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times-circle"></i></a></span> and <span class="editable">') + '<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times-circle"></i></a></span>'
+            '<span class="editable">' + mealPlan.ingredients.join('<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times"></i></a></span> and <span class="editable">') + '<a href="#" class="delete" onclick="event.preventDefault();"><i class="fa fa-times"></i></a></span>'
         );
         $('p.hint').show();
     }

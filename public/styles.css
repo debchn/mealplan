@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600|Playfair+Display:400,700);
 body {
   width: 100%;
   *zoom: 1;
@@ -236,31 +237,146 @@ body:after {
   clear: both;
 }
 
-/* Main Styles */
+/* Drew Minns' Style Guide (drewminns.com/sandbox/styleguide.zip) */
 body {
-  font-family: Lato, Futura, sans-serif;
+  color: #333;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: "Playfair Display", serif;
+}
+
+p {
+  line-height: 25.6px;
+  margin: 22.4px 0;
+}
+
+small {
+  font-size: 12.8px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+a {
+  color: #81B89D;
+}
+a:hover {
+  color: #15251d;
+}
+
+header nav {
+  width: 100%;
+  padding: 5px 10px;
+  background: #3A3736;
+  color: #efefef;
+}
+
+form .form-element {
+  margin: 15px 0;
+}
+form .form-element label {
+  display: block;
+  margin-bottom: 6.4px;
+  font-weight: 600;
+}
+form .form-element input {
+  width: 100%;
+  padding: 10px;
+}
+form .form-element .radio {
+  width: 100%;
+}
+form .form-element .radio label {
+  display: inline-block;
+}
+form .form-element .radio label input[type="radio"] {
+  width: auto;
+}
+
+button.button-default {
+  padding: 10px 25px;
+  background: #81B89D;
+  border: 0;
+  color: #fff;
+}
+button.button-default:hover {
+  background: #60a684;
+}
+
+button.button-success {
+  padding: 10px 25px;
+  background: #759DA7;
+  border: 0;
+  color: #fff;
+}
+button.button-success:hover {
+  background: #5b848e;
+}
+
+button.button-error {
+  padding: 10px 25px;
+  background: #EB4B4D;
+  border: 0;
+  color: #fff;
+}
+button.button-error:hover {
+  background: #e61d20;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Deb's Styles */
 header {
   text-align: center;
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 40px;
 }
 
 .wrapper {
-  width: 96%;
-  margin: 0 auto;
+  background: #eaeaea;
+  padding: 2%;
 }
 
-.noFrills,
-.recipes,
-.chosenMeals {
+h2 {
+  margin-top: 0;
+  font-size: 23px;
+}
+
+section {
+  padding: 2%;
+  background: white;
+}
+section.noFrills {
   display: inline;
   float: left;
   width: 31.25%;
   margin: 0 1.04167%;
+}
+
+.recipes {
+  display: inline;
+  float: left;
+  width: 64.58333%;
+  margin: 0 1.04167%;
+}
+.recipes .ingredient-list {
+  margin-bottom: 1em;
+}
+.recipes .generated-recipes {
+  min-height: 500px;
 }
 
 ul {
@@ -268,16 +384,8 @@ ul {
   padding: 0;
 }
 
-ul p, ul ul {
-  font-size: 14px;
-}
-
 a {
-  color: #0000A9;
   text-decoration: none;
-}
-a:hover {
-  font-weight: 700;
 }
 
 .noThanks {
@@ -285,27 +393,22 @@ a:hover {
   top: 3px;
   right: 3px;
 }
-.noThanks:hover {
-  color: #c30a1f;
-}
 
-/* No Frills */
 .noFrills .button {
   display: inline-block;
-  height: 30px;
-  border: 1px solid blue;
+  border: 1px solid #c2ddd0;
   border-radius: 5px;
   padding: 0 5px;
-  color: white;
-  background: blue;
-  font-variant: small-caps;
+  color: #333;
+  background: #c2ddd0;
 }
 .noFrills .button:hover {
-  background: LightBlue;
+  color: black;
+  background: #81B89D;
 }
 .noFrills .selected {
-  color: blue;
-  background: LightBlue;
+  color: black;
+  background: #81B89D;
 }
 .noFrills li {
   position: relative;
@@ -314,53 +417,62 @@ a:hover {
   border: 2px solid black;
   border-radius: 5px;
 }
+.noFrills li h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+.noFrills li p {
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  line-height: 21px;
+}
 
-/* Recipes */
 .recipes h2 span {
   display: inline-block;
 }
 .recipes h2 .editable {
-  padding: 2px 5px;
-  border: 2px solid blue;
+  border: 1px solid #c2ddd0;
   border-radius: 5px;
+  padding: 0 5px;
+  background: #c2ddd0;
   position: relative;
+  cursor: pointer;
 }
 .recipes h2 .editable .delete {
   position: absolute;
-  top: 0px;
-  right: 1px;
-  font-size: 12px;
+  top: -3px;
+  right: 0;
+  font-size: 11px;
+  color: #3a6650;
 }
 .recipes h2 .editable .delete:hover {
-  color: #c30a1f;
+  color: #030404;
 }
 .recipes p #addField {
   display: none;
 }
-.recipes .recipe {
+.recipes .generated-recipes ul {
+  margin: 0;
+}
+.recipes .generated-recipes ul article {
+  width: 70%;
+  margin: 60px auto;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: center;
+  color: #bab6b5;
+}
+.recipes .generated-recipes ul article i {
+  display: inline-block;
+  margin-right: 12px;
+}
+.recipes .generated-recipes .recipe {
   position: relative;
   padding: 0 15px 15px 15px;
   margin-bottom: 5px;
   border: 2px solid black;
   border-radius: 5px;
-}
-.recipes .recipe a {
-  display: inline-block;
-  margin-top: 10px;
 }
 
-/* chosenMeals */
-.chosenMeals .meal {
-  position: relative;
-  padding: 0 15px 15px 15px;
-  margin-bottom: 5px;
-  border: 2px solid black;
-  border-radius: 5px;
-}
-.chosenMeals .meal img {
-  max-width: 100%;
-}
-.chosenMeals .meal span a {
-  display: inline-block;
-  margin-top: 15px;
-}
+/*# sourceMappingURL=styles.css.map */

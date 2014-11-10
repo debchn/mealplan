@@ -80,7 +80,8 @@ def wrap_food_in_link(string)
 
 		"chocolate" => ["chocolate bars",
 						"chocolate chips",
-						"milk chocolate"],
+						"milk chocolate",
+						"chocolate milk"],
 
 		"cocktail"	=> ["cranberry cocktail",
 						"fruit cocktail",

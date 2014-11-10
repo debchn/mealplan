@@ -8,11 +8,12 @@
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div class="wrapper">
-		<header>
-			<h1>Meal Plan!</h1>
-		</header>
-		<div class="noFrills">
+
+	<header>
+		<nav><h1>Meal Plan</h1></nav>
+	</header>
+	<div class="wrapper clearfix">
+		<section class="noFrills">
 			<h2>For Sale This Week at No Frills:</h2>
 			<p>Click on one or more ingredients to generate corresponding recipe ideas from <a href="http://yummly.com/">Yummly</a>.</p>
 			<ul>
@@ -24,24 +25,30 @@
 					</li>
 				<% end %>
 			</ul>
-		</div>
+		</section>
 		<div class="recipes">
-			<h2>Recipes including <span id="ingredients">...</span></h2>
-			<p class="manualAdd">
-				<a href="#" onclick="event.preventDefault();"><i class="fa fa-plus-circle"></i> Manually add ingredient</a>
-				<input type="text" id="addField">
-			</p>
-			<p class='hint' style="display:none;">(Double-click ingredient fields to edit them.)</p>
-			<ul></ul>
-		</div>
-		<div class="chosenMeals">
+			<section class="ingredient-list">
+				<h2>Recipes including <span id="ingredients">...</span></h2>
+				<p class="manualAdd">
+					<a href="#" onclick="event.preventDefault();"><i class="fa fa-plus-circle"></i> Manually add ingredient</a>
+					<input type="text" id="addField">
+				</p>
+				<p class='hint' style="display:none;">(Double-click ingredient fields to edit them.)</p>
+			</section><!-- /.ingredient-list -->
+			<section class="generated-recipes">
+				<ul>
+					<article><i class="fa fa-arrow-left"></i>Click on sales items on the left, or manually add ingredients (above) to generate recipe ideas in this space!</article>
+				</ul>
+			</section>
+		</div><!-- /.recipes -->
+		<!-- <section class="chosenMeals">
 			<h2>Meals for the Week</h2>
 			<div class="foodGuide">
 				<p><em>Try to get 6-12 servings of fruits and vegetables, 4-6 servings of whole grain products, 1-3 servings of dairy products, and 1-2 servings of poultry, seafood, or meat alternatives per day.</em></p>
 			</div>
 			<ul></ul>
-		</div>
-	</div><!-- /.wrapper -->
+		</section> -->
+	</div>	<!-- /.wrapper -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="scripts.js"></script>
 </body>
