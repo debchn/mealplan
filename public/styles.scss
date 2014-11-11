@@ -45,10 +45,10 @@ body:after {
 
 /* Drew Minns' Style Guide (drewminns.com/sandbox/styleguide.zip) */
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600|Playfair+Display:400,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600|Open+Sans:300,700);
 
 $baseFont: 'Source Sans Pro', sans-serif;
-$headingsFont: 'Playfair Display', serif;
+$headingsFont: 'Open Sans', serif;
 $fontSize: 16px;
 $fontWeight: 300;
 $fontColour: #333;
@@ -264,9 +264,15 @@ a {
   li {
     position: relative;
     padding: 0 15px;
-    margin-bottom: 5px;
-    border: 2px solid black;
-    border-radius: 5px;
+    margin-bottom: 10px;
+    background: #fcfcfc;
+    border: 1px solid lightGrey;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    transition: background 1s;
+
+    &:hover {
+      background: white;
+    }
 
     h3 {
       margin: 10px 0;
@@ -338,9 +344,22 @@ a {
     .recipe {
       position: relative;
       padding: 0 15px 15px 15px;
-      margin-bottom: 5px;
-      border: 2px solid black;
-      border-radius: 5px;
+      margin-bottom: 10px;
+      background: #fcfcfc;
+      border: 1px solid lightGrey;
+      box-shadow: 0 0 3px rgba(0,0,0,0.2);
+      transition: background 1s;
+
+      &:hover {
+        background: white;
+      }
+
+      h3 {
+        margin: 10px 0 10px 0;
+        font-size: 25px;
+      }
+
+      p { margin: 10px 0 10px 0; }
     }
   }
 }

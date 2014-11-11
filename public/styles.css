@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600|Playfair+Display:400,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600|Open+Sans:300,700);
 body {
   width: 100%;
   *zoom: 1;
@@ -246,7 +246,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Playfair Display", serif;
+  font-family: "Open Sans", serif;
 }
 
 p {
@@ -430,9 +430,14 @@ a {
 .noFrills li {
   position: relative;
   padding: 0 15px;
-  margin-bottom: 5px;
-  border: 2px solid black;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  background: #fcfcfc;
+  border: 1px solid lightGrey;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: background 1s;
+}
+.noFrills li:hover {
+  background: white;
 }
 .noFrills li h3 {
   margin: 10px 0;
@@ -474,7 +479,7 @@ a {
 .recipes .generated-recipes ul article {
   width: 70%;
   margin: 60px auto;
-  font-family: "Playfair Display", serif;
+  font-family: "Open Sans", serif;
   font-weight: 400;
   font-size: 30px;
   text-align: center;
@@ -487,9 +492,21 @@ a {
 .recipes .generated-recipes .recipe {
   position: relative;
   padding: 0 15px 15px 15px;
-  margin-bottom: 5px;
-  border: 2px solid black;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  background: #fcfcfc;
+  border: 1px solid lightGrey;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: background 1s;
+}
+.recipes .generated-recipes .recipe:hover {
+  background: white;
+}
+.recipes .generated-recipes .recipe h3 {
+  margin: 10px 0 10px 0;
+  font-size: 25px;
+}
+.recipes .generated-recipes .recipe p {
+  margin: 10px 0 10px 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
