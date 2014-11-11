@@ -190,11 +190,32 @@ section {
 
   .ingredient-list {
     margin-bottom: 1em;
+
+    .manualAdd {
+      margin: 0;
+    }
+
+    .hint {
+      margin: 0 0 10px 0;
+    }
   }
 
   .generated-recipes {
     min-height: 500px;
+
+    .seeMore {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .favourited {
+      font-weight: bold;
+    }
   }
+}
+
+.chosenMeals {
+  display: none;
 }
 
 ul {

@@ -4,7 +4,7 @@ require 'mechanize'
 set :server, 'webrick'
 
 def human_food_only(groceries)
-	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Dial", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Crest", "Toothpaste", "Toothbrush", "Hair Care", "Lubriderm", "Cat Food", "Dog Food", "Whiskas", "Litter", "Garbage", "Ziploc", "Pampers", "Diapers"]
+	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Dial", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Crest", "Toothpaste", "Toothbrush", "Hair Care", "Lubriderm", "Cat Food", "Dog Food", "Whiskas", "Litter", "Garbage", "Ziploc", "Pampers", "Diapers", "Paper Towel"]
 	human_food = groceries.dup
 	
 	groceries.each do |item|
@@ -449,6 +449,7 @@ def wrap_food_in_link(string)
 						"sesame",
 						"shallots",
 						"sherbet",
+						"shortening",
 						"shrimp",
 						"slaw",
 						"soda",

@@ -375,8 +375,25 @@ section.noFrills {
 .recipes .ingredient-list {
   margin-bottom: 1em;
 }
+.recipes .ingredient-list .manualAdd {
+  margin: 0;
+}
+.recipes .ingredient-list .hint {
+  margin: 0 0 10px 0;
+}
 .recipes .generated-recipes {
   min-height: 500px;
+}
+.recipes .generated-recipes .seeMore {
+  display: inline-block;
+  margin-right: 10px;
+}
+.recipes .generated-recipes .favourited {
+  font-weight: bold;
+}
+
+.chosenMeals {
+  display: none;
 }
 
 ul {
