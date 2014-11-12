@@ -76,6 +76,8 @@ p {
   margin: $fontSize*1.4 0;
 }
 
+img { max-width: 100%; }
+
 small {
   font-size: $fontSize*0.8;
 }
