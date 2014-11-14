@@ -72,7 +72,8 @@ def wrap_food_in_link(string)
 						"chicken nuggets",
 					    "chicken strips",
 					    "chicken thighs",
-					    "chicken wings"],
+					    "chicken wings",
+					    "chicken noodle soup"],
 
 		"chips"		=> ["potato chips",
 						"pita chips",
@@ -81,7 +82,8 @@ def wrap_food_in_link(string)
 		"chocolate" => ["chocolate bars",
 						"chocolate chips",
 						"milk chocolate",
-						"chocolate milk"],
+						"chocolate milk",
+						"hot chocolate"],
 
 		"cocktail"	=> ["cranberry cocktail",
 						"fruit cocktail",
@@ -94,7 +96,8 @@ def wrap_food_in_link(string)
 		"cream"		=> ["ice cream",
 						"sour cream",
 						"whipped cream",
-						"whipping cream"],
+						"whipping cream",
+						"cream of mushroom"],
 
 		"dill"		=> ["dill pickles"],
 
@@ -153,7 +156,8 @@ def wrap_food_in_link(string)
 
 		"rice"      => ["jasmine rice",
 						"basmati rice",
-						"brown rice"],
+						"brown rice",
+						"rice cakes"],
 
 		"sauce"		=> ["barbecue sauce",
 						"bbq sauce",
@@ -455,7 +459,7 @@ def wrap_food_in_link(string)
 						"soda",
 						"sole",
 						"sorbet",
-						"soup",
+						# "soup",
 						"soy",
 						"spaghetti",
 						"spaghettini",
@@ -562,7 +566,7 @@ get '/' do
 
 	# get NoFrills sale items
 	scraper = Mechanize.new
-	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/4071c25d-a258-454a-b583-9a4b7e532591/Text?storeId=9c9351a1-1936-41cb-9335-b8888b2c598e&morePublications=false")
+	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/text?storenumber=730&publicationid=6e81add9-82ca-4fc8-b9e1-79432e6b5855")
 
 	# Flyer is in table format, and the sale items are in tables nested inside tables:
 	@food = eliminate_tables(
