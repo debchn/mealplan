@@ -4,7 +4,7 @@ require 'mechanize'
 set :server, 'webrick'
 
 def human_food_only(groceries)
-	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Dial", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Crest", "Toothpaste", "Toothbrush", "Hair Care", "Lubriderm", "Cat Food", "Dog Food", "Whiskas", "Litter", "Garbage", "Ziploc", "Pampers", "Diapers", "Paper Towel"]
+	not_human_food = ["Detergent", "Soap", "Candle", "Shower", "Shampoo", "Conditioner", "Dial", "Sunsilk", "Dishwashing", "Bathroom", "Tissue", "Toilet", "Pads", "Tampons", "Q-Tips", "Body Wash", "Crest", "Toothpaste", "Toothbrush", "Dentyne", "Hair Care", "Lubriderm", "Cat Food", "Dog Food", "Whiskas", "Litter", "Garbage", "Ziploc", "Pampers", "Diapers", "Paper Towel", "Foil"]
 	human_food = groceries.dup
 	
 	groceries.each do |item|
@@ -101,6 +101,8 @@ def wrap_food_in_link(string)
 
 		"dill"		=> ["dill pickles"],
 
+		"fish"      => ["fish fillets"],
+
 		"ginger"	=> ["ginger ale"],
 
 		"juice"		=> ["apple juice",
@@ -144,7 +146,8 @@ def wrap_food_in_link(string)
 						"popcorn chicken"],
 
 		"pork"		=> ["pork chops",
-						"pork shoulder"],
+						"pork shoulder",
+						"pork back ribs"],
 
 		"potatoes"	=> ["baking potatoes",
 						"mashed potatoes",
@@ -341,6 +344,7 @@ def wrap_food_in_link(string)
 						"lollipops",
 						"lox",
 						"lunch meat",
+						"luncheon meat",
 						"lychee",
 
 						"macaroni",
@@ -430,7 +434,7 @@ def wrap_food_in_link(string)
 						"ravioli",
 						"relish",
 						"rhubarb",
-						"ribs",
+						#{}"ribs",
 						"rice",
 						"rolls",
 						"romaine",
@@ -566,7 +570,7 @@ get '/' do
 
 	# get NoFrills sale items
 	scraper = Mechanize.new
-	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/text?storenumber=730&publicationid=6e81add9-82ca-4fc8-b9e1-79432e6b5855")
+	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/78d853de-c72f-43a0-b652-0effa4c7df24/Text?storeId=9c9351a1-1936-41cb-9335-b8888b2c598e&morePublications=false")
 
 	# Flyer is in table format, and the sale items are in tables nested inside tables:
 	@food = eliminate_tables(
