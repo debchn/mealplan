@@ -242,6 +242,7 @@ def wrap_food_in_link(string)
 						"cinnamon",
 						"clam",
 						"clams",
+						"clementines",
 						"cloves",
 						"coca-cola",
 						"coconut",
@@ -570,7 +571,7 @@ get '/' do
 
 	# get NoFrills sale items
 	scraper = Mechanize.new
-	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/78d853de-c72f-43a0-b652-0effa4c7df24/Text?storeId=9c9351a1-1936-41cb-9335-b8888b2c598e&morePublications=false")
+	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/text?storenumber=730&publicationid=e5918999-887f-40f5-a507-9d6c5aeaab67")
 
 	# Flyer is in table format, and the sale items are in tables nested inside tables:
 	@food = eliminate_tables(
