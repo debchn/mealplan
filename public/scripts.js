@@ -13,43 +13,100 @@ mealPlan.apikey = "f235b2cf2658a138b83a42670e7c1374";
 mealPlan.appId = "441e00da";
 
 // jQuery selectors
+mealPlan.saleItems = $('.noFrills li');
 mealPlan.chosenMeals = $('.chosenMeals ul');
 mealPlan.generatedRecipesList = $('.recipes ul');
 mealPlan.ingredientsSpan = $('#ingredients');
 mealPlan.manualAddButton = $('.manualAdd a');
 mealPlan.manualAddField = $('#addField');
 
-$('.noFrills .button').on('click', function(){
-    if ($(this).hasClass("selected")) {
-        // then the person is trying to unselect it.
-        $(this).removeClass("selected");
+mealPlan.nonHumanFood = ["bathroom", "batteries", "body wash", "candle", "cat food", "conditioner", "crest", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "hair care", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "shampoo", "shower", "soap", "sunsilk", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "whiskas", "ziploc"];
 
-        // remove from mealPlan.ingredients
-        mealPlan.removeFromIngredients($(this));
+mealPlan.removeNonFood = function(element){
 
-        if (!$.isEmptyObject(mealPlan.ingredients)) {
-            mealPlan.getRecipes(mealPlan.ingredients);
+    for (index in mealPlan.nonHumanFood) {
+        if (element.html().toLowerCase().indexOf(mealPlan.nonHumanFood[index]) != -1) {
+            element.css("display", "none");
+            return;
         }
-
-        // remove from .recipes h2
-        mealPlan.updateh2();
-
-    } else {
-        // the person is trying to select it. Turn it blue...
-        $(this).addClass("selected");
-        // make its id the lower-case, whitespace-removed version of its text
-        $(this).attr("id", $(this).text().replace(/\s/, '').toLowerCase());
-
-        // ... add it to mealPlan.ingredients...
-        var ingredient = $(this).text().toLowerCase();
-        mealPlan.ingredients.push(ingredient);
-
-        // ...and then make an AJAX call for the ingredient.
-        console.log(mealPlan.ingredients);
-        mealPlan.updateh2();
-        mealPlan.getRecipes(mealPlan.ingredients);
     }
-});
+};
+
+mealPlan.compoundWords = {
+    "apples"    : ["mcintosh apples"],
+    "bacon"     : ["peameal bacon"],
+    "beans"     : ["black beans", "butter beans", "fava beans", "garbanzo beans", "green beans", "jelly beans", "kidney beans", "lima beans", "pinto beans", "soy beans", "string beans"],
+    "beef"      : ["beef brisket", "ground beef"],
+    "brownie"   : ["brownie mix"],
+    "butter"    : ["almond butter", "peanut butter", "butter tarts"],
+    "cake"      : ["cake mix"],
+    "cheese"    : ["cheddar cheese", "cottage cheese", "cream cheese", "feta cheese", "gouda cheese", "processed cheese", "shredded cheese", "swiss cheese"],
+    "chicken"   : ["chicken breasts", "chicken nuggets", "chicken strips", "chicken thighs", "chicken wings", "chicken noodle soup"],
+    "chips"     : ["potato chips", "pita chips", "chocolate chips"],
+    "chocolate" : ["chocolate bars", "chocolate chips", "milk chocolate", "chocolate milk", "hot chocolate", "chocolate orange"],
+    "cocktail"  : ["cranberry cocktail", "fruit cocktail", "V8 cocktail", "vegetable cocktail"],
+    "coffee"    : ["instant coffee", "ground coffee"],
+    "cream"     : ["ice cream", "sour cream", "whipped cream", "whipping cream", "cream of mushroom"],
+    "dill"      : ["dill pickles"],
+    "fish"      : ["fish fillets"],
+    "ginger"    : ["ginger ale"],
+    "juice"     : ["apple juice", "cranberry juice", "orange juice", "tomato juice"],
+    "lettuce"   : ["iceberg lettuce", "romaine lettuce"],
+    "milk"      : ["evaporated milk", "coconut milk"],
+    "oil"       : ["canola oil", "olive oil", "peanut oil", "sesame oil", "vegetable oil"],
+    "onions"    : ["french fried onions", "green onions", "red onions", "yellow onions"],
+    "oranges"   : ["blood oranges", "mandarin oranges", "navel oranges"],
+    "peas"      : ["black-eyed peas", "black eyed peas", "chick peas", "split peas"],
+    "pepper"    : ["cayenne pepper"],
+    "peppers"   : ["bell peppers", "chili peppers", "jalapeno peppers"],
+    "popcorn"   : ["popcorn shrimp", "popcorn chicken"],
+    "pork"      : ["pork chops", "pork shoulder"],
+    "potatoes"  : ["baking potatoes", "mashed potatoes", "sweet potatoes"],
+    "powder"    : ["chili powder", "curry powder", "garlic powder"],
+    "rice"      : ["jasmine rice", "basmati rice", "brown rice", "rice cakes"],
+    "sauce"     : ["barbecue sauce", "bbq sauce", "oyster sauce", "pasta sauce", "plum sauce", "soy sauce", "sweet and sour sauce", "tomato sauce"],
+    "sprouts"   : ["alfalfa sprouts", "brussels sprouts", "bean sprouts"],
+    "sugar"     : ["brown sugar", "icing sugar", "powdered sugar"],
+    "tea"       : ["black tea", "green tea", "iced tea", "jasmine tea", "orange pekoe tea"],
+    "yogurt"    : ["frozen yogurt"]
+};
+
+mealPlan.foodWords = [ "alfalfa", "almonds", "anchovies", "anise", "apricots", "artichoke", "asparagus", "aspic", "avocado", "bagels", "bamboo shoots", "bananas", "barley", "basil", "bean curd", "beets", "biscuits", "blackberries", "blueberries", "boysenberries", "bran", "bread", "brisket", "broccoli", "brownies", "buckwheat", "buns", "candy", "cantaloupe", "capers", "caramel", "carrots", "cashews", "cassava", "cauliflower", "caviar", "celery", "cereal", "chard", "cheesecake", "cherries", "chickpeas", "chili", "chives", "chocolates", "chutney", "cilantro", "cinnamon", "clam", "clams", "clementines", "cloves", "coca-cola", "coconut", "cod", "coleslaw", "collard greens", "cookies", "cool whip", "corn", "cornflakes", "cornmeal", "crab", "crackers", "cream", "cucumbers", "cupcakes", "curds", "currants", "custard", "daikon", "dandelion greens", "dates", "dill", "donuts", "donut", "doughnuts", "dragonfruit", "dressing", "durian", "eggs", "eggplant", "elderberries", "endives", "figs", "five alive", "flax", "flour", "french fries", "fritters", "frosting", "fruitopia", "garlic", "gelatin", "ginger", "gingerale", "gingerbread", "gouda", "granola", "grapes", "grapefruit", "gravy", "guacamole", "guava", "haddock", "halibut", "ham", "hamburger", "hazelnuts", "honey", "honeydew", "horseradish", "hot dog", "hot sauce", "hummus", "ice cream", "jackfruit", "jalapeno", "jam", "jelly", "jellybeans", "jicama", "kale", "kebabs", "ketchup", "kiwi", "kohlrabi", "kool-aid", "kumquat", "lamb", "lard", "lasagna", "lemons", "lemonade", "lentils", "lettuce", "licorice", "limes", "liver", "lobster", "lollipops", "lox", "lunch meat", "luncheon meat", "lychee", "macaroni", "macaroons", "mangoes", "maple syrup", "margarine", "marmalade", "mayonnaise", "meatball", "meatballs", "meatloaf", "melon", "melons", "meringue", "milk", "mint", "mints", "miracle whip", "molasses", "mozzarella", "muffins", "mushrooms", "mussels", "mustard",  "naan", "nectarines", "nestea", "noodles", "nuts", "nutmeg", "oats", "oatmeal", "oil", "okra", "olives", "onions", "oranges", "oregano", "oysters", "pancake mix", "paneer", "papaya", "parsley", "parsnip", "pasta", "pastries", "peaches", "peanuts", "peanut butter", "pears", "pecans", "penne", "pepper", "peppers", "pepperoni", "pepsi", "persimmons", "pickles", "pie", "pineapple", "pineapples", "pita", "plums", "pomegranates", "popsicles", "potatoes", "pretzels", "prime rib", "prunes", "pudding", "pumpernickel", "pumpkin", "punch", "quiche", "quinoa", "radishes", "raisins", "raspberries", "ravioli", "relish", "rhubarb", "ribs", "rice", "rolls", "romaine", "rosemary", "rye", "saffron", "sage", "salad", "salami", "salmon", "salsa", "salt", "sauerkraut", "sausage", "sausages", "scallops", "seaweed", "seeds", "sesame", "shallots", "sherbet", "shortening", "shrimp", "slaw", "soda", "sole", "sorbet", "soy", "spaghetti", "spaghettini", "spareribs", "spinach", "sprinkles", "sprouts", "squash", "squid", "steak", "strawberries", "strudel", "sugar", "sunflower seeds", "taco", "tamales", "tangerine", "tapioca", "taro", "tarragon", "tea", "teriyaki", "thyme", "tilapia", "toffee", "tofu", "tomatoes", "tortilla", "trout", "tuna", "turkey", "turmeric", "turnip", "vanilla", "veal", "venison", "vinegar", "wafers", "waffles", "walnuts", "wasabi", "water chestnuts", "watercress", "watermelon", "whey", "weiners", "wieners", "yam", "yeast", "zucchini" ];
+
+mealPlan.linkFoodItems = function(element){
+    var str = element.html();
+
+    for (key in mealPlan.compoundWords){
+        // if the element contains the key word
+        var re = new RegExp(("\\s" + key + "\\s"), "i");
+        if (str.search(re) !== -1) {
+            // check to see if the element contains any of the compound words. else, just highlight the key word.
+            var wordToWrap = mealPlan.checkForCompound(key, mealPlan.compoundWords[key], str);
+            str = str.replace(wordToWrap, " <a class='button' href='#' onclick='event.preventDefault();'>$&</a> ");
+            element.html(str);
+        }
+    }
+
+    for (index in mealPlan.foodWords) {
+        var re = new RegExp(("\\s" + mealPlan.foodWords[index] + "\\s"), "i");
+        if (str.search(re) !== -1) {
+            str = str.replace(new RegExp(mealPlan.foodWords[index], "i"), " <a class='button' href='#' onclick='event.preventDefault();'>$&</a> ");
+            element.html(str);
+        }
+    }
+};
+
+mealPlan.checkForCompound = function(word, compoundWords, string){
+    // receives the single word and the array of compound words associated with the single word. returns which match is in the string.
+    for (index in compoundWords) {
+        var re = new RegExp(("\\s" + compoundWords[index] + "\\s"), "i");
+        if (string.search(re) !== -1) { 
+            return new RegExp(compoundWords[index], "i"); 
+        };
+    }
+    re = new RegExp(word, "i");
+    return re;
+};
 
 $('.noThanks').on('click', function(){
     $(this).parent().slideUp();
@@ -353,3 +410,45 @@ mealPlan.addFavourite = function(recipe){
         $(this).remove();
     });
 };
+
+$(function(){
+
+    mealPlan.saleItems.each(function(i, e){
+        var e = $(e);
+        mealPlan.removeNonFood(e);
+        mealPlan.linkFoodItems(e);
+    });
+
+    $('.noFrills .button').on('click', function(){
+        if ($(this).hasClass("selected")) {
+            // then the person is trying to unselect it.
+            $(this).removeClass("selected");
+
+            // remove from mealPlan.ingredients
+            mealPlan.removeFromIngredients($(this));
+
+            if (!$.isEmptyObject(mealPlan.ingredients)) {
+                mealPlan.getRecipes(mealPlan.ingredients);
+            }
+
+            // remove from .recipes h2
+            mealPlan.updateh2();
+
+        } else {
+            // the person is trying to select it. Turn it blue...
+            $(this).addClass("selected");
+            // make its id the lower-case, whitespace-removed version of its text
+            $(this).attr("id", $(this).text().replace(/\s/, '').toLowerCase());
+
+            // ... add it to mealPlan.ingredients...
+            var ingredient = $(this).text().toLowerCase();
+            mealPlan.ingredients.push(ingredient);
+
+            // ...and then make an AJAX call for the ingredient.
+            console.log(mealPlan.ingredients);
+            mealPlan.updateh2();
+            mealPlan.getRecipes(mealPlan.ingredients);
+        }
+    });
+
+});
