@@ -20,7 +20,7 @@ mealPlan.ingredientsSpan = $('#ingredients');
 mealPlan.manualAddButton = $('.manualAdd a');
 mealPlan.manualAddField = $('#addField');
 
-mealPlan.nonHumanFood = ["bathroom", "batteries", "body wash", "candle", "cat food", "conditioner", "crest", "cup of soup", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "hair care", "lean cuisine", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "shampoo", "shower", "snack bars", "snuggle", "soap", "sunsilk", "sunlight", "superfries", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "whiskas", "ziploc"];
+mealPlan.nonHumanFood = ["anti-perspirant", "bathroom", "batteries", "body wash", "candle", "cat food", "conditioner", "crest", "cup of soup", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "gilette", "hair care", "head & shoulders", "herbal essences", "lean cuisine", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "shampoo", "shower", "snack bars", "snuggle", "soap", "sunsilk", "sunlight", "superfries", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "whiskas", "ziploc"];
 
 mealPlan.removeNonFood = function(element){
 
