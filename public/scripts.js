@@ -23,13 +23,14 @@ mealPlan.manualAddField = $('#addField');
 mealPlan.nonHumanFood = ["anti-perspirant", "bathroom", "batteries", "bleach", "body wash", "bouquet", "candle", "cat food", "conditioner", "crest", "cup of soup", "delissio", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "gilette", "hair care", "head & shoulders", "herbal essences", "lean cuisine", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "ristorante", "sale!", "shampoo", "shower", "snack bars", "snuggle", "soap", "sunsilk", "sunlight", "superfries", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "vaseline", "vitamins", "whiskas", "ziploc"];
 
 mealPlan.removeNonFood = function(element){
-
-    for (index in mealPlan.nonHumanFood) {
-        if (element.html().toLowerCase().indexOf(mealPlan.nonHumanFood[index]) != -1) {
-            element.css("display", "none");
-            return;
+    var nonFoods = _.filter(
+        mealPlan.nonHumanFood,
+        function(item){
+            var regItem = new RegExp(("\\s" + item + "\\s"), "i");
+            return element.html().search(regItem) !== -1;
         }
-    }
+    );
+    if (nonFoods.length !== 0) { element.css("display", "none"); }
 };
 
 mealPlan.compoundWords = {
