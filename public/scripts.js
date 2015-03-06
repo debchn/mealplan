@@ -20,17 +20,17 @@ mealPlan.ingredientsSpan = $('#ingredients');
 mealPlan.manualAddButton = $('.manualAdd a');
 mealPlan.manualAddField = $('#addField');
 
-mealPlan.nonHumanFood = ["anti-perspirant", "bathroom", "batteries", "bleach", "body wash", "bouquet", "candle", "cat food", "conditioner", "crest", "cup of soup", "delissio", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "gilette", "hair care", "head & shoulders", "herbal essences", "lean cuisine", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "ristorante", "sale!", "shampoo", "shower", "snack bars", "snuggle", "soap", "sunsilk", "sunlight", "superfries", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "vaseline", "vitamins", "whiskas", "ziploc"];
+mealPlan.nonHumanFood = ["anti-perspirant", "bathroom", "batteries", "bleach", "body wash", "bouquet", "candle", "cat food", "conditioner", "crest", "cup of soup", "delissio", "dentyne", "detergent", "dial", "diapers", "dishwashing", "dog food", "foil", "garbage", "gilette", "hair care", "head & shoulders", "herbal essences", "lean cuisine", "litter", "lubriderm", "pads", "pampers", "paper towel", "poinsettia", "q-tips", "ristorante", "sale!", "shampoo", "shower", "snack bars", "snuggle", "soap", "sunsilk", "sunlight", "superfries", "tampons", "tissue", "toilet", "toothbrush", "toothpaste", "vaseline", "vitamins", "windshield washer fluid", "whiskas", "ziploc"];
 
 mealPlan.removeNonFood = function(element){
-    var nonFoods = _.filter(
+    var nonFood = _.find(
         mealPlan.nonHumanFood,
         function(item){
             var regItem = new RegExp(("\\s" + item + "\\s"), "i");
             return element.html().search(regItem) !== -1;
         }
     );
-    if (nonFoods.length !== 0) { element.css("display", "none"); }
+    if (nonFood) { element.css("display", "none"); }
 };
 
 mealPlan.compoundWords = {
@@ -72,43 +72,20 @@ mealPlan.compoundWords = {
     "yogurt"    : ["frozen yogurt"]
 };
 
-mealPlan.foodWords = [ "alfalfa", "almonds", "anchovies", "anise", "apricots", "artichoke", "asparagus", "aspic", "avocado", "bagels", "bamboo shoots", "bananas", "barley", "basa", "basil", "bean curd", "beets", "biscuits", "blackberries", "blueberries", "bok choy", "bologna", "boysenberries", "bran", "bread", "brie", "brisket", "broccoli", "brownies", "buckwheat", "buns", "camembert", "candy", "cantaloupe", "cantaloupes", "capers", "caramel", "carrots", "cashews", "cassava", "cauliflower", "caviar", "celery", "cereal", "chard", "cheesecake", "cheez whiz", "cherries", "chickpeas", "chili", "chives", "chocolates", "chutney", "cilantro", "cinnamon", "clam", "clamato", "clams", "clementines", "cloves", "coca-cola", "coconut", "cod", "coleslaw", "collard greens", "cookies", "cool whip", "corn", "cornflakes", "cornmeal", "crab", "crackers", "cream", "cucumbers", "cupcakes", "curds", "currants", "custard", "daikon", "dandelion greens", "dates", "deli meat", "dill", "donuts", "donut", "doughnuts", "dragonfruit", "dressing", "duck", "durian", "eggs", "egg nog", "eggplant", "elderberries", "endives", "figs", "five alive", "flax", "flour", "french fries", "fritters", "frosting", "fruitopia", "garlic", "gelatin", "ginger", "gingerale", "gingerbread", "gouda", "granola", "grapes", "grapefruit", "gravy", "guacamole", "guava", "haddock", "halibut", "ham", "hamburger", "hazelnuts", "honey", "honeydew", "horseradish", "hot dog", "hot sauce", "hummus", "ice cream", "jackfruit", "jalapeno", "jam", "jelly", "jellybeans", "jicama", "kale", "kebabs", "ketchup", "kiwi", "kohlrabi", "kool-aid", "kumquat", "lamb", "lard", "lasagna", "lemons", "lemonade", "lentils", "lettuce", "licorice", "limes", "liver", "lobster", "lollipops", "lox", "lunch meat", "luncheon meat", "lychee", "macaroni", "macaroons", "mangoes", "maple syrup", "margarine", "marmalade", "mayonnaise", "meatball", "meatballs", "meatloaf", "melon", "melons", "meringue", "milk", "mint", "mints", "miracle whip", "molasses", "mozzarella", "muffins", "mushrooms", "mussels", "mustard",  "naan", "nectarines", "nestea", "noodles", "nuts", "nutmeg", "oats", "oatmeal", "oil", "okra", "olives", "onions", "oranges", "oregano", "oysters", "pancake mix", "paneer", "papaya", "parsley", "parsnip", "pasta", "pastries", "peaches", "peanuts", "peanut butter", "pears", "pecans", "penne", "pepper", "peppers", "pepperoni", "pepsi", "persimmons", "pickles", "pie", "pineapple", "pineapples", "pistachios", "pita", "plums", "pollock", "pomegranates", "popsicles", "potatoes", "pretzels", "prime rib", "prosciutto", "prunes", "pudding", "pumpernickel", "pumpkin", "punch", "quiche", "quinoa", "radishes", "raisins", "raspberries", "ravioli", "relish", "rhubarb", "ribs", "rice", "rolls", "romaine", "rosemary", "rye", "saffron", "sage", "salad", "salami", "salmon", "salsa", "salt", "sardines", "sauerkraut", "sausage", "sausages", "scallops", "seaweed", "seeds", "sesame", "shallots", "sherbet", "shortening", "shrimp", "slaw", "soda", "sole", "sorbet", "soup mix", "soy", "spaghetti", "spaghettini", "spareribs", "spinach", "sprinkles", "sprouts", "squash", "squid", "star fruit", "steak", "strawberries", "strudel", "sugar", "sunflower seeds", "taco", "tamales", "tangerine", "tapioca", "taro", "tarragon", "tea", "teriyaki", "thyme", "tilapia", "toffee", "tofu", "tomatoes", "tortilla", "trout", "tuna", "turkey", "turmeric", "turnip", "vanilla", "veal", "vegetables", "venison", "vinegar", "wafers", "waffles", "walnuts", "wasabi", "water chestnuts", "watercress", "watermelon", "whey", "weiners", "wieners", "yam", "yeast", "zucchini" ];
-
-// mealPlan.linkFoodItems = function(element){
-//     var str = element.html();
-
-//     for (key in mealPlan.compoundWords){
-//         // if the element contains the key word
-//         var re = new RegExp(("\\s" + key + "\\s"), "i");
-//         if (str.search(re) !== -1) {
-//             // check to see if the element contains any of the compound words. else, just highlight the key word.
-//             var wordToWrap = mealPlan.checkForCompound(key, mealPlan.compoundWords[key], str);
-//             str = str.replace(wordToWrap, " <a class='button' href='#' onclick='event.preventDefault();'>$&</a> ");
-//             element.html(str);
-//         }
-//     }
-
-//     for (index in mealPlan.foodWords) {
-//         var re = new RegExp(("\\s" + mealPlan.foodWords[index] + "\\s"), "i");
-//         if (str.search(re) !== -1) {
-//             str = str.replace(new RegExp(mealPlan.foodWords[index], "i"), " <a class='button' href='#' onclick='event.preventDefault();'>$&</a> ");
-//             element.html(str);
-//         }
-//     }
-// };
+mealPlan.foodWords = [ "alfalfa", "almonds", "anchovies", "anise", "apricots", "artichoke", "asparagus", "aspic", "avocado", "bagels", "bamboo shoots", "bananas", "barley", "basa", "basil", "bean curd", "beets", "biscuits", "blackberries", "blueberries", "bok choy", "bologna", "boysenberries", "bran", "bread", "brie", "brisket", "broccoli", "brownies", "buckwheat", "buns", "camembert", "candy", "cantaloupe", "cantaloupes", "capers", "caramel", "carrots", "cashews", "cassava", "cauliflower", "caviar", "celery", "cereal", "chard", "cheesecake", "cheez whiz", "cherries", "chickpeas", "chili", "chives", "chocolates", "chutney", "cilantro", "cinnamon", "clam", "clamato", "clams", "clementines", "cloves", "coca-cola", "coconut", "cod", "coleslaw", "collard greens", "cookies", "cool whip", "corn", "cornflakes", "cornmeal", "crab", "crackers", "cream", "cucumbers", "cupcakes", "curds", "currants", "custard", "daikon", "dandelion greens", "dates", "deli meat", "dill", "donuts", "donut", "doughnuts", "dragonfruit", "dressing", "duck", "durian", "eggs", "egg nog", "eggplant", "elderberries", "endives", "figs", "five alive", "flax", "flour", "french fries", "fritters", "frosting", "fruitopia", "garlic", "gelatin", "ginger", "gingerale", "gingerbread", "gouda", "granola", "grapes", "grapefruit", "gravy", "guacamole", "guava", "haddock", "halibut", "ham", "hamburger", "hazelnuts", "honey", "honeydew", "horseradish", "hot dog", "hot sauce", "hummus", "ice cream", "jackfruit", "jalapeno", "jam", "jelly", "jellybeans", "jicama", "kale", "kebabs", "ketchup", "kiwi", "kohlrabi", "kolbassa", "kool-aid", "kumquat", "lamb", "lard", "lasagna", "lemons", "lemonade", "lentils", "lettuce", "licorice", "limes", "liver", "lobster", "lollipops", "lox", "lunch meat", "luncheon meat", "lychee", "macaroni", "macaroons", "mangoes", "maple syrup", "margarine", "marmalade", "mayonnaise", "meatball", "meatballs", "meatloaf", "melon", "melons", "meringue", "milk", "mint", "mints", "miracle whip", "molasses", "mozzarella", "muffins", "mushrooms", "mussels", "mustard",  "naan", "nectarines", "nestea", "noodles", "nuts", "nutmeg", "oats", "oatmeal", "oil", "okra", "olives", "onions", "oranges", "oregano", "oysters", "pancake mix", "paneer", "papaya", "parsley", "parsnip", "pasta", "pastries", "peaches", "peanuts", "peanut butter", "pears", "pecans", "penne", "pepper", "pepperettes", "pepperoni", "peppers", "pepsi", "persimmons", "pickles", "pie", "pineapple", "pineapples", "pistachios", "pita", "plums", "pollock", "pomegranates", "popsicles", "potatoes", "pretzels", "prime rib", "prosciutto", "prunes", "pudding", "pumpernickel", "pumpkin", "punch", "quiche", "quinoa", "radishes", "raisins", "raspberries", "ravioli", "relish", "rhubarb", "ribs", "rice", "rolls", "romaine", "rosemary", "rye", "saffron", "sage", "salad", "salami", "salmon", "salsa", "salt", "sardines", "sauerkraut", "sausage", "sausages", "scallops", "seaweed", "seeds", "sesame", "shallots", "sherbet", "shortening", "shrimp", "slaw", "soda", "sole", "sorbet", "soup mix", "soy", "spaghetti", "spaghettini", "spareribs", "spinach", "sprinkles", "sprouts", "squash", "squid", "star fruit", "steak", "strawberries", "strudel", "sugar", "sunflower seeds", "taco", "tamales", "tangerine", "tapioca", "taro", "tarragon", "tea", "teriyaki", "thyme", "tilapia", "toffee", "tofu", "tomatoes", "tortilla", "trout", "tuna", "turkey", "turmeric", "turnip", "vanilla", "veal", "vegetables", "venison", "vinegar", "wafers", "waffles", "walnuts", "wasabi", "water chestnuts", "watercress", "watermelon", "whey", "weiners", "wieners", "yam", "yeast", "zucchini" ];
 
 mealPlan.linkFoodItems = function(element){
 
     var str = element.html();
-    var matchingKey = _.filter(
+    var matchingKey = _.find(
         Object.keys(mealPlan.compoundWords), 
         function(key){ 
             var regKey = new RegExp(("\\s" + key + "\\s"), "i");
             return str.search(regKey) !== -1;
         }
     );
-    if (matchingKey.length !== 0) {
-        var wordToWrap = mealPlan.checkForCompound(matchingKey[0], mealPlan.compoundWords[matchingKey[0]], str);
+    if (matchingKey) {
+        var wordToWrap = mealPlan.checkForCompound(matchingKey, str);
         str = str.replace(wordToWrap, " <a class='button' href='#' onclick='event.preventDefault();'>$&</a> ");
         element.html(str);
     }
@@ -116,8 +93,8 @@ mealPlan.linkFoodItems = function(element){
     var matchingWord = _.filter(
         mealPlan.foodWords,
         function(food){
-            var regKey = new RegExp(("\\s" + food + "\\s"), "i");
-            return str.search(regKey) !== -1;
+            var regFood = new RegExp(("\\s" + food + "\\s"), "i");
+            return str.search(regFood) !== -1;
         }
     );
     if (matchingWord.length !== 0) {
@@ -129,16 +106,25 @@ mealPlan.linkFoodItems = function(element){
 
 };
 
-mealPlan.checkForCompound = function(word, compoundWords, string){
-    // receives the single word and the array of compound words associated with the single word. returns which match is in the string.
-    for (index in compoundWords) {
-        var re = new RegExp(("\\s" + compoundWords[index] + "\\s"), "i");
-        if (string.search(re) !== -1) { 
-            return new RegExp(compoundWords[index], "i"); 
-        };
+mealPlan.checkForCompound = function(word, string){
+// receives the matched word, examines the array of compound words associated with the single word, and returns which match is in the string.
+
+    var compoundPhrase = _.find(
+        mealPlan.compoundWords[word],
+        function(phrase){
+            var regPhrase = new RegExp(("\\s" + phrase + "\\s"), "i");
+            return string.search(regPhrase) !== -1;
+        }
+    );
+
+    if (compoundPhrase) {
+        return new RegExp(compoundPhrase, "i");
+    } else {
+        return new RegExp(word, "i");
     }
-    re = new RegExp(word, "i");
-    return re;
+
+    var wrapThis = (compoundPhrase) ? compoundPhrase : word;
+    return wrapThis;
 };
 
 // Functions
