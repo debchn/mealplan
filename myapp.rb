@@ -4,6 +4,11 @@ require 'sinatra/activerecord'
 require './environments'
 
 class Flyer < ActiveRecord::Base
+	has_many :items
+end
+
+class Item < ActiveRecord::Base
+	belongs_to :flyer
 end
 
 def eliminate_tables(nok_array)

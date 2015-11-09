@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109001602) do
+ActiveRecord::Schema.define(version: 20151109230536) do
 
   create_table "flyers", force: :cascade do |t|
-    t.text     "contents"
+    t.text     "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "label"
+    t.text     "description"
+    t.integer  "flyer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
