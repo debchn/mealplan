@@ -1,7 +1,10 @@
 require 'sinatra'
 require 'mechanize'
+require 'sinatra/activerecord'
+require './environments'
 
-set :server, 'webrick'
+class Flyer < ActiveRecord::Base
+end
 
 def eliminate_tables(nok_array)
 	tableless = []
