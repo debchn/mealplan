@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 gem 'sinatra'
 gem 'mechanize'
+gem 'whenever'
 gem "activerecord"
 gem "sinatra-activerecord"
-gem 'sinatra-flash'
-gem 'sinatra-redirect-with-flash'
 
 group :development do
  gem 'sqlite3'

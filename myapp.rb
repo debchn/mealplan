@@ -35,3 +35,6 @@ get '/' do
 
 	erb :index
 end
+
+## instead: run Mechanize once a week and store that info in table
+## get '/' do ==> @food = eliminate_tables(Flyer.last)
