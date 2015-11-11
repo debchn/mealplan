@@ -1,42 +1,68 @@
 require 'sinatra'
-require 'mechanize'
 require 'sinatra/activerecord'
 require './environments'
+require 'capybara/poltergeist'
+require 'phantomjs'
+
+# activerecord models
 
 class Flyer < ActiveRecord::Base
 	has_many :items
+
+	def self.fetch_and_save_url(session)
+
+		session.visit "https://www.nofrills.ca/en_CA/flyers.accessibleview.banner@NOFR.storenum@730.week@current.html"
+		iframe = session.find('#videoFrame')
+
+		flyer = Flyer.create(:url => iframe[:src])
+
+		return flyer
+	end
 end
 
 class Item < ActiveRecord::Base
 	belongs_to :flyer
-end
 
-def eliminate_tables(nok_array)
-	tableless = []
-	for item in nok_array
-		# make a hash of <b> and <p> elements
-		nicer_item = {}
-		trs = item.search('tr')
+	def self.fetch_and_save_items(session, flyer)
+		
+		session.visit flyer.url
+		item_list = session.all('table table')
+		
+		for item in item_list
 
+			trs = item.all('tr')
 
-		nicer_item[:label] = trs[0].text.gsub("/r/n", " ")
-		nicer_item[:description] = trs[1].text.gsub("\r\n", " ")
+			label = trs[0].text.gsub("/r/n", " ")
+			description = trs[1].text.gsub("\r\n", " ")
 
-		# append to tableless
-		tableless << nicer_item
+			Item.create(:label => label, :description => description, :flyer_id => flyer.id)
+		end
 	end
-	tableless
 end
+
+# Capybara session that grabs flyer and saves its url and items
+
+def fetch_and_save_new_flyer
+
+	# capybara / poltergeist setup
+
+	Capybara.register_driver :poltergeist do |app|
+	 	Capybara::Poltergeist::Driver.new(app, js_errors: false)
+	end
+
+	Capybara.default_driver = :poltergeist
+
+	session = Capybara.current_session
+
+	flyer = Flyer.fetch_and_save_url(session)
+	Item.fetch_and_save_items(session, flyer)
+
+end
+
 
 get '/' do
 
-	# get NoFrills sale items
-	scraper = Mechanize.new
-
-	flyer = scraper.get("https://local.flyerservices.com/LCL/NOFR/en/text?storenumber=730&publicationid=9f89ac14-850d-4aa6-9b16-71f236433371")
-
-	# Flyer is in table format, and the sale items are in tables nested inside tables:
-	@food = eliminate_tables(flyer.search("table table"))
+	@food = Flyer.last.items
 
 	erb :index
 end
