@@ -4,6 +4,8 @@ gem 'mechanize'
 gem 'whenever'
 gem "activerecord"
 gem "sinatra-activerecord"
+gem 'capybara'
+gem 'poltergeist'
 
 group :development do
  gem 'sqlite3'
